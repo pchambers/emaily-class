@@ -9,6 +9,7 @@ require('./services/passport');
 
 
 mongoose.connect(keys.mongoURI);
+mongoose.Promise = global.Promise;
 
 const app = express();
 
@@ -33,7 +34,7 @@ if (process.env.NODE_ENV === 'production'){
 
   //Express to serve index.html if it doesn't recognize route.
   const path = require('path');
-  //checkout circle ci at some point for continuous integration. 
+  //checkout circle ci at some point for continuous integration.
   app.get('*', (req,res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
