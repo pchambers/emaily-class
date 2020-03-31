@@ -1,38 +1,48 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Payments from './Payments'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Payments from "./Payments";
 
-class Header extends Component{
-  renderContent(){
+class Header extends Component {
+  renderContent() {
     switch (this.props.auth) {
       case null:
         return;
       case false:
-        return <li><a href="/auth/google">Log in with Google</a></li>
+        return (
+          <li>
+            <a href="/auth/google">Log in with Google</a>
+          </li>
+        );
       default:
         return [
-          <li key="1"> <Payments/></li>,
-          <li key="2" style={{margin: '0 10px' }}>Credits: {this.props.auth.credits}</li>,
-          <li key="3"><a href="/api/logout">Logout</a></li>
+          <li key="1" >
+            {" "}
+            <Payments />
+          </li>,
+          <li key="3" style={{ margin: "0 10px" }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key="2">
+            <a href="/api/logout">Logout</a>
+          </li>
         ];
     }
-  };
+  }
 
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper" style={{ margin: "0 10px" }}>
           <Link
-            to={this.props.auth ? 'surveys' : '/'}
-            className="left brand-logo" href="/"
+            to={this.props.auth ? "/surveys" : "/"}
+            className="left brand-logo"
+            href="/"
           >
             Emaily
           </Link>
           <ul className="right">
-            <li>
-              {this.renderContent()}
-            </li>
+            <li>{this.renderContent()}</li>
           </ul>
         </div>
       </nav>
